@@ -22,7 +22,8 @@ scripts/
   build-tile.py        draws the tiled background grid
 deploy/
   docker-compose.yml   nginx container + Traefik labels
-  nginx.conf           server block
+  nginx/default.conf   server block (mounted as a directory: git replaces files by rename,
+                       a file bind-mount would keep serving the old inode)
 assets/source/         the original logo file
 ```
 
