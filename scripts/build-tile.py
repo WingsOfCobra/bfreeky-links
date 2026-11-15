@@ -9,19 +9,23 @@ import zlib
 
 SIZE = 240
 BG = (0, 0, 0)
-LINE = (18, 18, 18)      # the grid
-MAJOR = (30, 30, 30)     # every 5th line
 CELL = 12
 
+# (filename, grid line colour, every-5th-line colour)
+VARIANTS = [
+    ("tile.png", (18, 18, 18), (30, 30, 30)),
+    ("tile-red.png", (58, 12, 12), (92, 18, 18)),
+]
 
-def main():
+
+def make(out_dir, name, line, major):
     rows = []
     for y in range(SIZE):
         row = bytearray([0])
         for x in range(SIZE):
             c = BG
             if x % CELL == 0 or y % CELL == 0:
-                c = MAJOR if (x % (CELL * 5) == 0 or y % (CELL * 5) == 0) else LINE
+                c = major if (x % (CELL * 5) == 0 or y % (CELL * 5) == 0) else line
             row += bytes(c)
         rows.append(bytes(row))
     raw = b"".join(rows)
@@ -34,11 +38,17 @@ def main():
            + chunk(b"IHDR", struct.pack(">IIBBBBB", SIZE, SIZE, 8, 2, 0, 0, 0))
            + chunk(b"IDAT", zlib.compress(raw, 9))
            + chunk(b"IEND", b""))
-    out = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
-                       "site", "assets", "tile.png")
-    with open(out, "wb") as fh:
+    with open(os.path.join(out_dir, name), "wb") as fh:
         fh.write(png)
-    print("tile.png", SIZE, "x", SIZE, len(png), "bytes")
+    return len(png)
+
+
+def main():
+    out = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
+                       "site", "assets")
+    for name, line, major in VARIANTS:
+        size = make(out, name, line, major)
+        print(f"{name} {SIZE}x{SIZE} {size} bytes")
 
 
 if __name__ == "__main__":

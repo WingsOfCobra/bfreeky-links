@@ -28,9 +28,9 @@ def main():
         raise SystemExit("no ink found in " + SRC)
     mark = src.crop(box)
 
-    # wordmark: luminance becomes alpha -> white letterforms, no black plate
-    logo = mark.convert("RGBA")
-    logo.putalpha(mark.convert("L"))
+    # wordmark: keep the original pixels (white faces + grey bevel/shadow) on their black plate;
+    # the page uses mix-blend-mode:screen so the black disappears and the shading survives.
+    logo = mark
     logo.thumbnail((1600, 1600), Image.LANCZOS)
     logo.save(os.path.join(OUT, "logo.png"), optimize=True)
 
