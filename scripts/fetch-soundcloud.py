@@ -101,7 +101,7 @@ def rows_block(tracks):
         else:
             thumb = ""
             cls = "track__thumb track__thumb--ph"
-        meta = " · ".join(x for x in (t["date"], dur(t["duration_ms"])) if x)
+        meta = dur(t["duration_ms"])
         if t["plays"]:
             meta += f' · {t["plays"]} PLAYS'
         out.append(
@@ -142,7 +142,6 @@ def main():
     index = open(INDEX, encoding="utf-8").read()
     index = patch(index, "RELEASES", "\n" + rows_block(tracks) + "\n      ")
     index = patch(index, "COUNT", str(len(tracks)))
-    index = patch(index, "SYNC", f"SYNCED {synced}")
 
     os.makedirs(os.path.dirname(JSON_OUT), exist_ok=True)
     for path, data in ((JSON_OUT, json.dumps(payload, indent=2, ensure_ascii=False) + "\n"),
