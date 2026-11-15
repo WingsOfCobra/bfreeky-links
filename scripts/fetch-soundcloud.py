@@ -101,7 +101,7 @@ def rows_block(tracks):
         else:
             thumb = ""
             cls = "track__thumb track__thumb--ph"
-        meta = " · ".join(x for x in (esc(t["genre"]).upper(), t["date"], dur(t["duration_ms"])) if x)
+        meta = " · ".join(x for x in (t["date"], dur(t["duration_ms"])) if x)
         if t["plays"]:
             meta += f' · {t["plays"]} PLAYS'
         out.append(

@@ -95,7 +95,7 @@
       auto_play: autoplay !== false,
       show_artwork: false,
       visual: false,
-      color: '#c8ff00',
+      color: '#ff2b2b',
       hide_related: true,
       show_comments: false,
       show_reposts: false,

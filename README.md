@@ -7,8 +7,9 @@ no framework, hosted on `schrombus` behind the existing Traefik and published at
 ```
 site/                  what nginx serves
   index.html           markup + the auto-generated RELEASES block
-  assets/style.css     all styling (industrial terminal, monochrome + one signal colour)
-  assets/app.js        clock + player UI
+  assets/style.css     all styling (black, hard edges, red accents, Y2K)
+  assets/app.js        player UI
+  assets/tile.png      tiled background grid (scripts/build-tile.py)
   assets/logo.png      wordmark, trimmed, alpha from luminance
   assets/favicon.png    "B" mark
   assets/og.jpg        1200x630 social preview
@@ -16,6 +17,7 @@ site/                  what nginx serves
 scripts/
   fetch-soundcloud.py  pulls the track list and rewrites the RELEASES block in index.html
   build-assets.py      derives logo.png / favicon.png / og.jpg from assets/source/
+  build-tile.py        draws the tiled background grid
 deploy/
   docker-compose.yml   nginx container + Traefik labels
   nginx.conf           server block
