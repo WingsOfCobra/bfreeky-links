@@ -1,0 +1,26 @@
+name: bfreeky
+
+services:
+  bfreeky-web:
+    image: nginx:1.27-alpine
+    container_name: bfreeky_web
+    restart: unless-stopped
+    volumes:
+      - ../site:/usr/share/nginx/html:ro
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
+    networks:
+      - proxy-manager_default
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=proxy-manager_default"
+      - "traefik.http.routers.bfreeky.rule=Host(`bfreeky.lmcustoms.cc`)"
+      - "traefik.http.routers.bfreeky.entrypoints=websecure"
+      - "traefik.http.routers.bfreeky.tls=true"
+      - "traefik.http.routers.bfreeky.tls.certresolver=letsencrypt"
+      - "traefik.http.routers.bfreeky.service=bfreeky"
+      - "traefik.http.routers.bfreeky.middlewares=secured@file"
+      - "traefik.http.services.bfreeky.loadbalancer.server.port=80"
+
+networks:
+  proxy-manager_default:
+    external: true
