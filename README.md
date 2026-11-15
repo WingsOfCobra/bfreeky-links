@@ -12,7 +12,7 @@ site/                  what nginx serves
   assets/speakers.js   the two Yamaha HS8 wireframes (own ~90-line 3D projector, no library)
   assets/tile.png      tiled background grid (scripts/build-tile.py)
   assets/tile-red.png  red copy of the grid, used for the glitch flashes
-  assets/logo.png      wordmark, trimmed, alpha from luminance
+  assets/logo.png      wordmark, trimmed; black plate removed by mix-blend-mode:screen
   assets/favicon.png    "B" mark
   assets/og.jpg        1200x630 social preview
   data/releases.json   machine-readable track list (written by the cron)
