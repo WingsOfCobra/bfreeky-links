@@ -105,9 +105,7 @@ def rows_block(tracks):
         if t["plays"]:
             meta += f' · {t["plays"]} PLAYS'
         out.append(
-            f'        <a class="track" href="{esc(t["url"])}" target="_blank" rel="noopener"'
-            f' data-id="{t["id"]}" data-title="{esc(t["title"])}"'
-            f' data-url="{esc(t["url"])}" data-dur="{t["duration_ms"]}">\n'
+            f'        <a class="track" href="{esc(t["url"])}" target="_blank" rel="noopener">\n'
             f'          <span class="track__i">{i:02d}</span>\n'
             f'          <span class="{cls}"{thumb}></span>\n'
             f'          <span class="track__body">\n'

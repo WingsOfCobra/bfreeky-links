@@ -1,4 +1,10 @@
-/* BFREEKY — Y2K / early-web look. Black, hard edges, red accents, chunky type. No gradients. */
+/* BFREEKY — Y2K / early-web look. Black, hard edges, red accents, chunky type. No gradients.
+   Type: Orbitron (display / labels, the "spaceship" face) + Chakra Petch (body, release titles).
+   Both OFL, self-hosted in assets/fonts/ — no request ever leaves this domain. */
+
+@font-face{font-family:'Orbitron';font-style:normal;font-weight:400 900;font-display:swap;src:url("fonts/orbitron-400-900-latin.woff2") format('woff2')}
+@font-face{font-family:'Chakra Petch';font-style:normal;font-weight:400;font-display:swap;src:url("fonts/chakra-petch-400-latin.woff2") format('woff2')}
+@font-face{font-family:'Chakra Petch';font-style:normal;font-weight:600;font-display:swap;src:url("fonts/chakra-petch-600-latin.woff2") format('woff2')}
 
 :root{
   --bg:#000;
@@ -8,8 +14,8 @@
   --line:#262626;
   --line2:#3d3d3d;
   --red:#ff2b2b;
-  --sans:"Helvetica Neue",Helvetica,Arial,sans-serif;
-  --mono:ui-monospace,"SF Mono",SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;
+  --space:"Orbitron","Chakra Petch",Helvetica,Arial,sans-serif;
+  --sans:"Chakra Petch","Helvetica Neue",Helvetica,Arial,sans-serif;
   --pad:clamp(16px,4vw,40px);
 }
 
@@ -19,7 +25,7 @@ body{
   margin:0;
   background:transparent;
   color:var(--ink);
-  font:400 14px/1.5 var(--sans);
+  font:400 14px/1.55 var(--sans);
   -webkit-font-smoothing:antialiased;
 }
 
@@ -72,9 +78,9 @@ main{max-width:960px;margin:0 auto;padding:0 var(--pad);background:rgba(0,0,0,.7
 @keyframes gl1{0%{transform:translate(0,0)}25%{transform:translate(-6px,2px)}50%{transform:translate(4px,-2px)}75%{transform:translate(-2px,0)}100%{transform:translate(0,0)}}
 @keyframes gl2{0%{transform:translate(0,0)}25%{transform:translate(5px,-1px)}50%{transform:translate(-4px,2px)}75%{transform:translate(3px,0)}100%{transform:translate(0,0)}}
 
-.hero__meta{font:400 11px/1.6 var(--sans);letter-spacing:.2em;text-transform:uppercase;color:#9a9a9a}
+.hero__meta{font:400 10.5px/1.6 var(--space);letter-spacing:.17em;text-transform:uppercase;color:#9a9a9a}
 
-/* the double rule: white bar, red bar offset under it */
+/* the double rule: white bar, grey bar offset under it */
 .rule{position:relative;height:2px;background:var(--ink);margin:4px 0 0}
 .rule::after{content:"";position:absolute;left:0;right:0;top:6px;height:2px;background:#3d3d3d}
 
@@ -83,11 +89,11 @@ main{max-width:960px;margin:0 auto;padding:0 var(--pad);background:rgba(0,0,0,.7
 .nl{
   display:flex;align-items:center;justify-content:center;gap:12px;
   padding:30px 10px;border:2px solid var(--line2);margin-left:-2px;
-  font:700 clamp(15px,1.9vw,20px)/1 var(--sans);letter-spacing:.07em;text-transform:uppercase;
+  font:700 clamp(13px,1.6vw,17px)/1 var(--space);letter-spacing:.05em;text-transform:uppercase;
   text-align:center;transition:color .05s linear,border-color .05s linear,background-color .05s linear;
 }
 .nl:first-child{margin-left:0}
-.nl .ic{width:1.45em;height:1.45em;flex:none;color:var(--red)}
+.nl .ic{width:1.5em;height:1.5em;flex:none;color:var(--red)}
 .nl:hover,.nl:focus-visible{background:var(--ink);color:#000;border-color:var(--ink)}
 .nl:hover .ic,.nl:focus-visible .ic{color:#000}
 .nl span{border-bottom:2px solid transparent}
@@ -96,88 +102,38 @@ main{max-width:960px;margin:0 auto;padding:0 var(--pad);background:rgba(0,0,0,.7
 /* ── section heading ─────────────────────────────────────── */
 .shead{display:flex;justify-content:space-between;align-items:baseline;gap:14px;margin-bottom:14px}
 .shead h2{
-  font:700 clamp(18px,2.4vw,24px)/1 var(--sans);text-transform:uppercase;color:var(--ink);
+  font:700 clamp(17px,2.2vw,22px)/1 var(--space);letter-spacing:.04em;text-transform:uppercase;color:var(--ink);
   text-decoration:underline;text-decoration-color:var(--red);
   text-decoration-thickness:2px;text-underline-offset:6px;
 }
-.shead__m{font:400 11px/1.4 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:#9a9a9a}
+.shead__m{font:400 10.5px/1.4 var(--space);letter-spacing:.13em;text-transform:uppercase;color:#9a9a9a}
 .block{margin-bottom:clamp(28px,5vw,50px)}
 
-/* ── release list ────────────────────────────────────────── */
-.split{display:grid;gap:clamp(28px,5vw,50px);grid-template-columns:1fr}
-@media (min-width:900px){.split{grid-template-columns:1.25fr .75fr;align-items:start}
-  .deck{position:sticky;top:20px}}
-
+/* ── release list (plain links out to SoundCloud) ────────── */
+#releases{max-width:720px}
 .tracks{border-top:2px solid var(--ink)}
 .track{
-  display:grid;grid-template-columns:30px 40px 1fr 14px;align-items:center;gap:14px;
+  display:grid;grid-template-columns:34px 40px 1fr 12px;align-items:center;gap:14px;
   padding:11px 10px 11px 8px;border-bottom:1px solid var(--line);
   transition:background-color .05s linear,color .05s linear;
 }
-.track__i{font:400 11px/1 var(--mono);color:#6f6f6f}
+.track__i{font:400 10.5px/1 var(--space);letter-spacing:.06em;color:#6f6f6f;font-variant-numeric:tabular-nums}
 .track__thumb{width:40px;height:40px;background:#111 center/cover no-repeat;border:1px solid var(--line2)}
 .track__thumb--ph{background:#0b0b0b url("favicon.png") center/20px 20px no-repeat;opacity:.7}
-.track__body{min-width:0;display:flex;flex-direction:column;gap:4px}
-.track__title{font:700 15px/1.2 var(--sans);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.track__meta{font:400 11px/1 var(--mono);letter-spacing:.09em;text-transform:uppercase;color:#9a9a9a;
+.track__body{min-width:0;display:flex;flex-direction:column;gap:5px}
+.track__title{font:600 15.5px/1.2 var(--sans);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.track__meta{font:400 10.5px/1 var(--space);letter-spacing:.1em;text-transform:uppercase;color:#9a9a9a;
   white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.track__cue{width:10px;height:10px;background:var(--line2)}
+.track__cue{width:11px;height:11px;background:var(--line2)}
 .track:hover,.track:focus-visible{background:#151515}
 .track:hover .track__meta,.track:hover .track__i{color:var(--dim)}
 .track:hover .track__thumb{border-color:var(--dim)}
-.track:hover .track__cue{background:var(--ink)}
-.track.is-live{background:#151515}
-.track.is-live .track__cue{background:var(--red)}
-
-/* ── player deck (own UI; the SoundCloud widget runs invisibly underneath) ───── */
-.deck{border:2px solid var(--ink);background:#060606;box-shadow:6px 6px 0 #2b2b2b}
-.deck__screen{display:flex;flex-direction:column;gap:8px;min-height:76px;padding:14px 15px;border-bottom:2px solid var(--ink)}
-.deck__row1{display:flex;align-items:baseline;gap:10px;min-width:0}
-.deck__idx{flex:none;font:400 11px/1 var(--mono);color:#6f6f6f}
-.deck__title{font:700 17px/1.15 var(--sans);text-transform:uppercase;
-  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.deck__row2{font:400 11px/1 var(--mono);letter-spacing:.09em;text-transform:uppercase;color:#9a9a9a;
-  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-
-.deck__seek{position:relative;height:18px;cursor:crosshair;background:#0d0d0d;border-bottom:1px solid var(--line)}
-.deck__seek::before{content:"";position:absolute;left:0;right:0;top:6px;height:6px;background:#2b2b2b}
-.deck__fill{position:absolute;left:0;top:6px;height:6px;width:0;background:var(--ink)}
-.deck__knob{position:absolute;left:0;top:2px;width:3px;height:14px;background:var(--ink)}
-
-.deck__times{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:9px 15px;
-  font:400 11px/1 var(--mono);letter-spacing:.1em;color:var(--dim);font-variant-numeric:tabular-nums}
-.deck__meter{display:flex;align-items:flex-end;gap:3px;height:15px;opacity:.25;transition:opacity .15s linear}
-.deck.is-playing .deck__meter{opacity:1}
-.deck__meter i{display:block;width:3px;height:4px;background:var(--ink)}
-.deck.is-playing .deck__meter i{animation:lvl .5s ease-in-out infinite alternate}
-.deck__meter i:nth-child(2){animation-delay:.06s}
-.deck__meter i:nth-child(3){animation-delay:.12s}
-.deck__meter i:nth-child(4){animation-delay:.18s}
-.deck__meter i:nth-child(5){animation-delay:.24s}
-.deck__meter i:nth-child(6){animation-delay:.3s}
-@keyframes lvl{from{height:3px}to{height:15px}}
-
-.deck__ctl{display:grid;grid-template-columns:repeat(3,1fr) auto;border-top:1px solid var(--line)}
-.btn{
-  appearance:none;background:transparent;border:0;border-right:2px solid var(--ink);
-  color:var(--ink);font:700 13px/1 var(--sans);letter-spacing:.1em;padding:15px 10px;cursor:pointer;
-  transition:background-color .05s linear,color .05s linear;
-}
-.btn:hover,.btn:focus-visible{background:var(--ink);color:#000}
-.btn--play{font-size:15px}
-.btn--link{display:flex;align-items:center;justify-content:center;border-right:0;border-left:2px solid var(--ink);
-  font:700 10px/1 var(--sans);letter-spacing:.12em;padding:15px 14px}
-.deck__sink{position:relative;height:1px;overflow:hidden;opacity:.01}
-.deck__sink iframe{display:block;width:320px;height:180px;border:0}
-.deck__hint{margin-top:16px;font:400 11px/1.9 var(--mono);letter-spacing:.09em;text-transform:uppercase;color:#9a9a9a}
-.deck__hint--fallback{color:var(--dim)}
-.deck__hint a{color:var(--ink);border-bottom:2px solid #4a4a4a}
-.deck__hint a:hover{color:var(--ink);border-bottom-color:var(--ink)}
+.track:hover .track__cue{background:var(--red)}
 
 /* ── footer ──────────────────────────────────────────────── */
 .foot{
   display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;max-width:960px;margin:0 auto;
-  padding:26px var(--pad) 40px;font:400 11px/1.6 var(--mono);letter-spacing:.1em;
+  padding:26px var(--pad) 40px;font:400 10.5px/1.7 var(--space);letter-spacing:.1em;
   text-transform:uppercase;color:#9a9a9a;background:rgba(0,0,0,.78);
 }
 .foot__r{display:flex;gap:20px}
@@ -187,12 +143,12 @@ main{max-width:960px;margin:0 auto;padding:0 var(--pad);background:rgba(0,0,0,.7
 /* ── small screens ───────────────────────────────────────── */
 @media (max-width:720px){
   .nav{grid-template-columns:1fr 1fr}
-  .nl{padding:20px 8px;font-size:13px;gap:9px}
+  .nl{padding:20px 8px;font-size:12.5px;gap:9px}
+  .nl .ic{width:1.35em;height:1.35em}
   .nl:nth-child(2n+1){margin-left:0}
-  .track{grid-template-columns:24px 34px 1fr;gap:11px;padding:10px 4px}
+  .track{grid-template-columns:26px 34px 1fr;gap:11px;padding:10px 4px}
   .track__thumb{width:34px;height:34px}
   .track__cue{display:none}
-  .btn--link{padding:15px 10px;font-size:9px}
   .shead{flex-direction:column;gap:6px;align-items:flex-start}
 }
 
@@ -200,5 +156,4 @@ main{max-width:960px;margin:0 auto;padding:0 var(--pad);background:rgba(0,0,0,.7
   body::before,body::after{animation:none}
   body::after{display:none}
   .logo:hover .logo__ghost{animation:none;opacity:.5}
-  .deck.is-playing .deck__meter i{animation:none;height:9px}
 }
