@@ -9,7 +9,6 @@ site/                  what nginx serves
   index.html           markup + the auto-generated RELEASES block
   assets/style.css     all styling (black, hard edges, red accents, Y2K)
   assets/app.js        player UI
-  assets/speakers.js   the two Yamaha HS8 wireframes (own ~90-line 3D projector, no library)
   assets/tile.png      tiled background grid (scripts/build-tile.py)
   assets/tile-red.png  red copy of the grid, used for the glitch flashes
   assets/logo.png      wordmark, trimmed; black plate removed by mix-blend-mode:screen
